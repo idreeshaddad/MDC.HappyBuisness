@@ -16,3 +16,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.theme-navbar {
+    background-color: #F7F7F7;
+}
+
+.theme-bg-gray {
+    background-color: #F7F7F7;
+}
+
+.theme-text-orange {
+    color: #FA7415 !important;
+}
