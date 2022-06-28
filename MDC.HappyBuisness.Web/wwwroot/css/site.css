@@ -1,20 +1,26 @@
+@font-face {
+    font-family: "Martel";
+    src: url("../fonts/martelsans/MartelSans-Regular.ttf") format("truetype"), url("../fonts/martelsans/MartelSans-Bold.ttf") format("truetype"),
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    /*font-family: "Martel";*/
 }
 
 .theme-navbar {
@@ -28,3 +34,53 @@ body {
 .theme-text-orange {
     color: #FA7415 !important;
 }
+
+.theme-logo img {
+    height: 40px;
+}
+
+.btn-orange {
+    color: white;
+    background-color: #FA7415 !important;
+}
+
+    .btn-orange:hover {
+        color: white;
+    }
+
+.mt-6 {
+    margin-top: 6rem;
+}
+
+.theme-card {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+    .theme-card .icon i {
+        font-size: 1.5rem;
+        padding: 14px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+    }
+
+    .theme-card .icon.orange i {
+        background: #ea8b4f4f;
+        color: #EA8B4F;
+    }
+
+    .theme-card .icon.purple i {
+        background: #9F87E94f;
+        color: #9F87E9;
+    }
+
+    .theme-card .icon.baby-blue i {
+        background: #6097BD4f;
+        color: #6097BD;
+    }
+
+    .theme-card .icon.navy i {
+        background: #C72A6C4f;
+        color: #C72A6C;
+    }

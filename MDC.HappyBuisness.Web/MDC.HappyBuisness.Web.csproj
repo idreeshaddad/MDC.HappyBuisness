@@ -20,4 +20,8 @@
     <ProjectReference Include="..\MDC.HappyBuisness.Utils\MDC.HappyBuisness.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
+  </ItemGroup>
+
 </Project>
