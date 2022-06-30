@@ -52,6 +52,10 @@ body {
     margin-top: 6rem;
 }
 
+.mt-8 {
+    margin-top: 8rem;
+}
+
 .theme-card {
     text-align: center;
     padding: 20px;
@@ -83,4 +87,49 @@ body {
     .theme-card .icon.navy i {
         background: #C72A6C4f;
         color: #C72A6C;
+    }
+
+
+    .theme-card:hover {
+        border-color: transparent;
+        cursor: pointer;
+        box-shadow: 0 0 8px #ddd;
+    }
+
+.stats {
+    background-color: #162B46;
+    color: #fff;
+}
+
+    .stats .stat .icon {
+        font-size: 4rem;
+    }
+
+        .stats .stat .icon.yellow {
+            color: #ffcd00;
+        }
+
+        .stats .stat .icon.red {
+            color: #c81818;
+        }
+
+        .stats .stat .icon.triq {
+            color: #6ec5a2;
+        }
+
+        .stats .stat .icon.moove {
+            color: #c359ac;
+        }
+
+    .stats .stat .num {
+        font-size: 4.8rem;
+        float: left;
+        line-height: 3.5rem;
+    }
+
+    .stats .stat .txt {
+        margin-left: 90px;
+        font-size: 1.4rem;
+        font-weight: bold;
+        line-height: 2rem;
     }
