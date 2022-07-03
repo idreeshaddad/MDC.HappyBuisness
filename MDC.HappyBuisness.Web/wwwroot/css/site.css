@@ -133,3 +133,22 @@ body {
         font-weight: bold;
         line-height: 2rem;
     }
+
+.testimonial-img {
+    width: 94px;
+    height: 94px;
+    border-radius: 50%;
+}
+
+
+.theme-person-card {
+    text-align: center;
+}
+
+    .theme-person-card a {
+        color: #444;
+    }
+
+    .theme-person-card a:hover {
+        color: #EA8B4F;
+    }
