@@ -19,7 +19,6 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
     /*font-family: "Martel";*/
 }
 
@@ -152,3 +151,21 @@ body {
     .theme-person-card a:hover {
         color: #EA8B4F;
     }
+
+.footer {
+    color: #fff;
+}
+
+.footer .upper {
+    background: #162B46;
+}
+
+.footer .lower {
+    background: #11233B;
+}
+
+.insta-feed .feed {
+    width: 110px;
+    height: 94px;
+    padding: 0 10px 10px 0;
+}
