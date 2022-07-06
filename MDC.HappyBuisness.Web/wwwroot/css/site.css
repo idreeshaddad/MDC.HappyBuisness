@@ -169,3 +169,7 @@ body {
     height: 94px;
     padding: 0 10px 10px 0;
 }
+
+.pointer {
+    cursor: pointer;
+}

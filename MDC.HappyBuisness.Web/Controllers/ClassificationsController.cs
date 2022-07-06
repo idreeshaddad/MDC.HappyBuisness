@@ -128,26 +128,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(classificationVM);
         }
 
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Classifications == null)
-            {
-                return NotFound();
-            }
-
-            var classification = await _context.Classifications
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (classification == null)
-            {
-                return NotFound();
-            }
-
-            var classificationVM = _mapper.Map<Classification, ClassificationViewModel>(classification);
-
-
-            return View(classificationVM);
-        }
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
