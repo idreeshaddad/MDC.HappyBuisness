@@ -1,21 +1,36 @@
-﻿using MDC.HappyBuisness.Web.Models;
+﻿using AutoMapper;
+using MDC.HappyBuisness.Entities;
+using MDC.HappyBuisness.Web.Data;
+using MDC.HappyBuisness.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using MDC.HappyBuisness.Web.Models.Drugs;
 
 namespace MDC.HappyBuisness.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IMapper mapper)
         {
             _logger = logger;
+            _context = context;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var drugs = await _context
+                            .Drugs
+                            .ToListAsync();
+
+            var drugVMS = _mapper.Map<List<Drug>, List<DrugViewModel>>(drugs);
+
+            return View(drugVMS);
         }
 
         public IActionResult Privacy()

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using MDC.HappyBuisness.Web.Models.Drugs
+@model List<DrugViewModel>
+
+@{
     ViewData["Title"] = "Highway to Pharmacy";
 }
 
@@ -23,6 +26,32 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<div class="mt-8">
+    <div class="container">
+        <div class="text-center">
+            <h6 class="theme-text-orange text-uppercase">Drugs Most Wanted by Our Clients</h6>
+            <h2 class="fw-bold">No Pain Yes Fun</h2>
+        </div>
+        <div class="row mt-5">
+
+            @foreach (var drug in Model)
+            {
+                <div class="col-md-4 mb-2">
+                    <div class="theme-card">
+                        <a class="d-block text-decoration-none theme-text-orange" asp-controller="Drugs" asp-action="Details" asp-route-Id="@drug.Id" class="theme-card">
+                            <div class="icon orange">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <h3>@drug.Name</h3>
+                        </a>
+                    </div>
+                </div>
+            }
+
+        </div>
     </div>
 </div>
 
