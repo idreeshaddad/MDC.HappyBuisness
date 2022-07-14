@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using MDC.HappyBuisness.Web.Models.Classifications;
 using System.ComponentModel.DataAnnotations;
 
 namespace MDC.HappyBuisness.Web.Models.Drugs
 {
-    public class DrugViewModel
+    public class DrugDetailsViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,9 +11,7 @@ namespace MDC.HappyBuisness.Web.Models.Drugs
         [Display(Name = "Street Name")]
         public string StreetName { get; set; }
         public double Price { get; set; }
-        public int ClassificationId { get; set; }
 
-        [ValidateNever]
-        public SelectList Classifications { get; set; }
+        public ClassificationViewModel Classification { get; set; }
     }
 }

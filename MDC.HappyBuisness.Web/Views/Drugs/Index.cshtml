@@ -1,5 +1,5 @@
 ﻿@using MDC.HappyBuisness.Web.Models.Drugs
-@model IEnumerable<DrugViewModel>
+@model IEnumerable<DrugListViewModel>
 
 @{
     ViewData["Title"] = "Drugs";
@@ -9,8 +9,9 @@
     <h1>Drugs</h1>
 
     <p>
-        <a asp-action="Create">Create New Drug</a>
+        <a class="btn btn-primary" asp-action="Create">Create New Drug</a>
     </p>
+    <p>Items Count: @Model.Count()</p>
     <table class="table">
         <thead>
             <tr>
@@ -23,33 +24,63 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Price)
                 </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.Classification)
-                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.ClassificationName)
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StreetName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.Classification.Name)
-                </td>*@
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StreetName)
+                    </td>
+                    <td>
+                        JOD <span class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Price)</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassificationName)
+                    </td>
+                    <td>
+                        <a class="text-decoration-none me-2" asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="fa-solid fa-marker" title="Edit" data-bs-toggle="tooltip"></i>
+                        </a>
+                        <a class="text-decoration-none text-info me-2" asp-action="Details" asp-route-id="@item.Id">
+                            <i class="fa-solid fa-circle-info" title="Details" data-bs-toggle="tooltip"></i>
+                        </a>
+                        <a class="text-decoration-none text-danger pointer" data-bs-toggle="modal" data-bs-target="#delete_@item.Id">
+                            <i class="fa-solid fa-trash" title="Delete" data-bs-toggle="tooltip"></i>
+                        </a>
+
+                        <div class="modal fade" id="delete_@item.Id">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Drug</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5>Are you sure you want to delete <span class="text-danger">@item.Name</span>?</h5>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        
+                                        <form asp-action="Delete">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <input type="submit" value="Delete" class="btn btn-danger" />
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MDC.HappyBuisness.Web.Models.Drugs
 {
-    public class DrugViewModel
+    public class DrugListViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,9 +12,8 @@ namespace MDC.HappyBuisness.Web.Models.Drugs
         [Display(Name = "Street Name")]
         public string StreetName { get; set; }
         public double Price { get; set; }
-        public int ClassificationId { get; set; }
 
-        [ValidateNever]
-        public SelectList Classifications { get; set; }
+        [Display(Name = "Classification Name")]
+        public string? ClassificationName { get; set; }
     }
 }

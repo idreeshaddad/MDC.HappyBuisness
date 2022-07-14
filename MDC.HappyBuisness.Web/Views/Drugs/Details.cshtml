@@ -1,5 +1,5 @@
 ﻿@using MDC.HappyBuisness.Web.Models.Drugs
-@model DrugViewModel
+@model DrugDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -29,12 +29,18 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
-        @*<dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Classification)
+        <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Classification.Id)
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.Classification.Id)
+        </dd>
+        <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Classification.Name)
         </dt>
         <dd class = "col-sm-10">
         @Html.DisplayFor(model => model.Classification.Name)
-        </dd>*@
+        </dd>
     </dl>
 
     <div>

@@ -8,6 +8,8 @@ namespace MDC.HappyBuisness.Web.AutoMapperProfiles
     {
         public DrugAutoMapperProfile()
         {
+            CreateMap<Drug, DrugListViewModel>();
+            CreateMap<Drug, DrugDetailsViewModel>();
             CreateMap<Drug, DrugViewModel>().ReverseMap();
         }
     }

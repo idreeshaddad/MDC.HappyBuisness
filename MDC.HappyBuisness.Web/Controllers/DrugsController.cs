@@ -32,7 +32,7 @@ namespace MDC.HappyBuisness.Web.Controllers
                             .Include(d => d.Classification)
                             .ToListAsync();
 
-            var drugVMS = _mapper.Map<List<Drug>, List<DrugViewModel>>(drugs);
+            var drugVMS = _mapper.Map<List<Drug>, List<DrugListViewModel>>(drugs);
 
             return View(drugVMS);
         }
@@ -53,29 +53,34 @@ namespace MDC.HappyBuisness.Web.Controllers
                 return NotFound();
             }
 
-            var drugVM = _mapper.Map<Drug, DrugViewModel>(drug);
+            var drugVM = _mapper.Map<Drug, DrugDetailsViewModel>(drug);
 
             return View(drugVM);
         }
 
         public IActionResult Create()
         {
-            ViewData["ClassificationId"] = new SelectList(_context.Classifications, "Id", "Name");
-            return View();
+            var drugVM = new DrugViewModel();
+            drugVM.Classifications = new SelectList(_context.Classifications, "Id", "Name");
+
+            return View(drugVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Drug drug)
+        public async Task<IActionResult> Create(DrugViewModel drugVM)
         {
             if (ModelState.IsValid)
             {
+                var drug = _mapper.Map<DrugViewModel, Drug>(drugVM);
+
                 _context.Add(drug);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClassificationId"] = new SelectList(_context.Classifications, "Id", "Name", drug.ClassificationId);
-            return View(drug);
+
+            drugVM.Classifications = new SelectList(_context.Classifications, "Id", "Name", drugVM.ClassificationId);
+            return View(drugVM);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -90,21 +95,25 @@ namespace MDC.HappyBuisness.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClassificationId"] = new SelectList(_context.Classifications, "Id", "Name", drug.ClassificationId);
-            return View(drug);
+
+            var drugVM = _mapper.Map<Drug, DrugViewModel>(drug);
+            drugVM.Classifications = new SelectList(_context.Classifications, "Id", "Name", drugVM.ClassificationId);
+            return View(drugVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Drug drug)
+        public async Task<IActionResult> Edit(int id, DrugViewModel drugVM)
         {
-            if (id != drug.Id)
+            if (id != drugVM.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var drug = _mapper.Map<DrugViewModel, Drug>(drugVM);
+                
                 try
                 {
                     _context.Update(drug);
@@ -123,8 +132,9 @@ namespace MDC.HappyBuisness.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClassificationId"] = new SelectList(_context.Classifications, "Id", "Name", drug.ClassificationId);
-            return View(drug);
+
+            drugVM.Classifications = new SelectList(_context.Classifications, "Id", "Name", drugVM.ClassificationId);
+            return View(drugVM);
         }
 
         [HttpPost, ActionName("Delete")]

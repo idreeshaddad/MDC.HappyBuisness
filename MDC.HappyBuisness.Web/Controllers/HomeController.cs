@@ -28,7 +28,7 @@ namespace MDC.HappyBuisness.Web.Controllers
                             .Drugs
                             .ToListAsync();
 
-            var drugVMS = _mapper.Map<List<Drug>, List<DrugViewModel>>(drugs);
+            var drugVMS = _mapper.Map<List<Drug>, List<DrugListViewModel>>(drugs);
 
             return View(drugVMS);
         }
