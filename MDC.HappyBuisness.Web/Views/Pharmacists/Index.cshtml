@@ -1,0 +1,75 @@
+﻿@using MDC.HappyBuisness.Web.Models.Pharmacists
+@model IEnumerable<PharmacistListViewModel>
+
+@{
+    ViewData["Title"] = "Pharmacists";
+}
+
+<div class="container">
+
+    <h1>Pharmacists</h1>
+    <hr />
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create New Pharmacist</a>
+    </p>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    <a class="text-decoration-none me-2" asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-marker" title="Edit" data-bs-toggle="tooltip"></i>
+                    </a>
+                    <a class="text-decoration-none text-info me-2" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-circle-info" title="Details" data-bs-toggle="tooltip"></i>
+                    </a>
+                    <a class="text-decoration-none text-danger pointer" data-bs-toggle="modal" data-bs-target="#delete_@item.Id">
+                        <i class="fa-solid fa-trash" title="Delete" data-bs-toggle="tooltip"></i>
+                    </a>
+
+                    <div class="modal fade" id="delete_@item.Id">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete Pharmacist</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h5>Are you sure you want to delete <span class="text-danger">@item.FullName</span>?</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                                    <form asp-action="Delete">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
