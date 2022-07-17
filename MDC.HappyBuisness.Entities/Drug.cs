@@ -11,6 +11,7 @@
         public string Name { get; set; }
         public string StreetName { get; set; }
         public double Price { get; set; }
+        public string ImageName { get; set; }
 
         public int ClassificationId { get; set; }
         public Classification Classification { get; set; }
