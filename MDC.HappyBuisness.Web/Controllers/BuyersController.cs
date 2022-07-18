@@ -40,14 +40,18 @@ namespace MDC.HappyBuisness.Web.Controllers
                 return NotFound();
             }
 
-            var buyer = await _context.Buyers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var buyer = await _context
+                                    .Buyers
+                                    .FirstOrDefaultAsync(m => m.Id == id);
+
             if (buyer == null)
             {
                 return NotFound();
             }
 
-            return View(buyer);
+            var buyerVM = _mapper.Map<BuyerDetailsViewModel>(buyer);
+
+            return View(buyerVM);
         }
 
         public IActionResult Create()
@@ -57,15 +61,17 @@ namespace MDC.HappyBuisness.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Buyer buyer)
+        public async Task<IActionResult> Create(BuyerViewModel buyerVM)
         {
             if (ModelState.IsValid)
             {
+                var buyer = _mapper.Map<Buyer>(buyerVM);
+
                 _context.Add(buyer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(buyer);
+            return View(buyerVM);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -80,20 +86,25 @@ namespace MDC.HappyBuisness.Web.Controllers
             {
                 return NotFound();
             }
-            return View(buyer);
+
+            var buyerVM = _mapper.Map<BuyerViewModel>(buyer);
+
+            return View(buyerVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Buyer buyer)
+        public async Task<IActionResult> Edit(int id, BuyerViewModel buyerVM)
         {
-            if (id != buyer.Id)
+            if (id != buyerVM.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var buyer = _mapper.Map<Buyer>(buyerVM);
+
                 try
                 {
                     _context.Update(buyer);
@@ -112,7 +123,7 @@ namespace MDC.HappyBuisness.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(buyer);
+            return View(buyerVM);
         }
 
         [HttpPost, ActionName("Delete")]

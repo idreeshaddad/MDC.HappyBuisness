@@ -1,42 +1,46 @@
-﻿@model MDC.HappyBuisness.Entities.Buyer
+﻿@using MDC.HappyBuisness.Web.Models.Buyers
+@model BuyerDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = $"{@Model.CodeName} Details";
 }
 
-<h1>Details</h1>
+<div class="container">
+    <h1><span class="text-primary">@Model.CodeName</span> Details</h1>
 
-<div>
-    <h4>Buyer</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CodeName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodeName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div>
+        <a class="btn btn-secondary me-2" asp-action="Index">Back</a>
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    </div>
+    <hr />
+
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CodeName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CodeName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DOB)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DOB)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DiscountInPercentage)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DiscountInPercentage)
+            </dd>
+        </dl>
+    </div>
 </div>

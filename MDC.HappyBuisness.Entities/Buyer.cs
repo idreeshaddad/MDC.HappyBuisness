@@ -35,5 +35,15 @@ namespace MDC.HappyBuisness.Entities
             }
         }
 
+        [NotMapped]
+        public string DiscountInPercentage
+        {
+            get
+            {
+                var per = Discount * 100;
+                return $"% {per}";
+            }
+        }
+
     }
 }

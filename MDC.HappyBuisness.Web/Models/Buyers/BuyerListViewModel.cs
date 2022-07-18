@@ -1,4 +1,5 @@
 ﻿using MDC.HappyBuisness.Utils.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace MDC.HappyBuisness.Web.Models.Buyers
 {
@@ -9,5 +10,8 @@ namespace MDC.HappyBuisness.Web.Models.Buyers
         public Gender Gender { get; set; }
         public int Age { get; set; }
         public double Discount { get; set; }
+
+        [Display(Name = "Discount %")]
+        public string DiscountInPercentage { get; set; }
     }
 }
