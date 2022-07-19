@@ -17,6 +17,9 @@ namespace MDC.HappyBuisness.Web.Models.Deals
         public int PharmacistId { get; set; }
         public List<int> DrugIds { get; set; }
 
+        [ValidateNever]
+        public Guid TransactionCode { get; set; }
+
 
         //----------------------------------------------------------------------------
         // Things needed in the HTTPGET but not in the HTTPPOST
@@ -28,6 +31,6 @@ namespace MDC.HappyBuisness.Web.Models.Deals
         public SelectList Pharmacists { get; set; }
 
         [ValidateNever]
-        public MultiSelectList Drugs { get; set; }
+        public MultiSelectList DrugsMultiSelect { get; set; }
     }
 }

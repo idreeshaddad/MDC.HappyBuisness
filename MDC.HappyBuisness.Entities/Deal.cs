@@ -13,6 +13,7 @@ namespace MDC.HappyBuisness.Entities
         public double TotalPrice { get; set; }
         public PaymentType PaymentType { get; set; }
         public DateTime DealTime { get; set; }
+        public DateTime LastModifiedTime { get; set; }
         public Guid TransactionCode { get; set; }
 
 

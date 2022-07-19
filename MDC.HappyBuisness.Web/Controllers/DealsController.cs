@@ -66,24 +66,37 @@ namespace MDC.HappyBuisness.Web.Controllers
 
             dealVM.Buyers = new SelectList(_context.Buyers, "Id", "CodeName");
             dealVM.Pharmacists = new SelectList(_context.Pharmacists, "Id", "FirstName");
-            dealVM.Drugs = new MultiSelectList(_context.Drugs, "Id", "StreetName");
+            dealVM.DrugsMultiSelect = new MultiSelectList(_context.Drugs, "Id", "StreetName");
 
             return View(dealVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Deal deal)
+        public async Task<IActionResult> Create(DealViewModel dealVM)
         {
             if (ModelState.IsValid)
             {
+                var deal = _mapper.Map<Deal>(dealVM);
+
+                deal.DealTime = DateTime.Now;
+                deal.LastModifiedTime = deal.DealTime;
+                deal.TransactionCode = Guid.NewGuid();
+
+
+                var drugs = _context.Drugs.Where(drug => dealVM.DrugIds.Contains(drug.Id)).ToList();
+                deal.Drugs.AddRange(drugs);
+
                 _context.Add(deal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BuyerId"] = new SelectList(_context.Buyers, "Id", "CodeName", deal.BuyerId);
-            ViewData["PharmacistId"] = new SelectList(_context.Pharmacists, "Id", "FirstName", deal.PharmacistId);
-            return View(deal);
+
+            dealVM.Buyers = new SelectList(_context.Buyers, "Id", "CodeName", dealVM.BuyerId);
+            dealVM.Pharmacists = new SelectList(_context.Pharmacists, "Id", "FirstName", dealVM.PharmacistId);
+            dealVM.DrugsMultiSelect = new MultiSelectList(_context.Drugs, "Id", "StreetName", dealVM.DrugIds);
+            
+            return View(dealVM);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -93,29 +106,44 @@ namespace MDC.HappyBuisness.Web.Controllers
                 return NotFound();
             }
 
-            var deal = await _context.Deals.FindAsync(id);
+            var deal = await _context
+                                .Deals
+                                .Include(d => d.Buyer)
+                                .Include(d => d.Pharmacist)
+                                .Include(d => d.Drugs)
+                                .FirstOrDefaultAsync(d => d.Id == id);
+
             if (deal == null)
             {
                 return NotFound();
             }
-            ViewData["BuyerId"] = new SelectList(_context.Buyers, "Id", "CodeName", deal.BuyerId);
-            ViewData["PharmacistId"] = new SelectList(_context.Pharmacists, "Id", "FirstName", deal.PharmacistId);
-            return View(deal);
+
+            var dealVM = _mapper.Map<DealViewModel>(deal);
+
+            dealVM.Buyers = new SelectList(_context.Buyers, "Id", "CodeName", dealVM.BuyerId);
+            dealVM.Pharmacists = new SelectList(_context.Pharmacists, "Id", "FirstName", dealVM.PharmacistId);
+
+            dealVM.DrugIds = deal.Drugs.Select(d => d.Id).ToList();
+            dealVM.DrugsMultiSelect = new MultiSelectList(_context.Drugs, "Id", "StreetName", dealVM.DrugIds);
+
+            return View(dealVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Deal deal)
+        public async Task<IActionResult> Edit(int id, DealViewModel dealVM)
         {
-            if (id != deal.Id)
+            if (id != dealVM.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var deal = _mapper.Map<Deal>(dealVM);
                 try
                 {
+                    deal.LastModifiedTime = DateTime.Now;
                     _context.Update(deal);
                     await _context.SaveChangesAsync();
                 }
@@ -132,9 +160,12 @@ namespace MDC.HappyBuisness.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BuyerId"] = new SelectList(_context.Buyers, "Id", "CodeName", deal.BuyerId);
-            ViewData["PharmacistId"] = new SelectList(_context.Pharmacists, "Id", "FirstName", deal.PharmacistId);
-            return View(deal);
+
+            dealVM.Buyers = new SelectList(_context.Buyers, "Id", "CodeName", dealVM.BuyerId);
+            dealVM.Pharmacists = new SelectList(_context.Pharmacists, "Id", "FirstName", dealVM.PharmacistId);
+            dealVM.DrugsMultiSelect = new MultiSelectList(_context.Drugs, "Id", "StreetName", dealVM.DrugIds);
+
+            return View(dealVM);
         }
 
         [HttpPost, ActionName("Delete")]
