@@ -14,6 +14,9 @@
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="TransactionCode" />
+                <input type="hidden" asp-for="DealTime" />
+
                 <div class="form-group">
                     <label asp-for="BuyerId" class="control-label"></label>
                     <select asp-for="BuyerId" class="form-control" asp-items="@Model.Buyers"></select>

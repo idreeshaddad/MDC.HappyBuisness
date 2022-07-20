@@ -48,7 +48,7 @@ namespace MDC.HappyBuisness.Web.Controllers
                                 .Deals
                                 .Include(d => d.Buyer)
                                 .Include(d => d.Pharmacist)
-                                .FirstOrDefaultAsync(m => m.Id == id);
+                                .SingleOrDefaultAsync(m => m.Id == id);
 
             if (deal == null)
             {
@@ -111,7 +111,7 @@ namespace MDC.HappyBuisness.Web.Controllers
                                 .Include(d => d.Buyer)
                                 .Include(d => d.Pharmacist)
                                 .Include(d => d.Drugs)
-                                .FirstOrDefaultAsync(d => d.Id == id);
+                                .SingleOrDefaultAsync(d => d.Id == id);
 
             if (deal == null)
             {

@@ -20,6 +20,9 @@ namespace MDC.HappyBuisness.Web.Models.Deals
         [ValidateNever]
         public Guid TransactionCode { get; set; }
 
+        [ValidateNever]
+        public DateTime DealTime { get; set; }
+
 
         //----------------------------------------------------------------------------
         // Things needed in the HTTPGET but not in the HTTPPOST
