@@ -85,7 +85,8 @@ namespace MDC.HappyBuisness.Web.Controllers
 
                 await AddDrugsToDealAsync(dealVM, deal);
 
-                // TODO calculate TOTAL price
+                await CalculateDealTotalPrice(deal);
+
                 _context.Add(deal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -144,13 +145,15 @@ namespace MDC.HappyBuisness.Web.Controllers
                 {
                     deal.LastModifiedTime = DateTime.Now;
 
-                    // TODO calculate TOTAL price
                     _context.Update(deal);
-                    // Save everthing EXCEPT Drugs (many-to-many)
                     await _context.SaveChangesAsync();
 
 
                     await UpdateDealDrugsAndSave(dealVM, deal.Id);
+                    await CalculateDealTotalPrice(deal);
+
+                    _context.Update(deal);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -171,32 +174,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             dealVM.DrugsMultiSelect = new MultiSelectList(_context.Drugs, "Id", "StreetName", dealVM.DrugIds);
 
             return View(dealVM);
-        }
-
-        private async Task UpdateDealDrugsAndSave(DealViewModel dealVM, int dealId)
-        {
-            // Load the Deal from DB
-            var deal = await _context
-                            .Deals
-                            .Include(d => d.Drugs)
-                            .Where(d => d.Id == dealId)
-                            .SingleAsync();
-
-            // Clear all deal drugs 
-            deal.Drugs.Clear();
-
-            // Load the new drugs from DB
-            var drugs = await _context
-                                    .Drugs
-                                    .Where(drug => dealVM.DrugIds.Contains(drug.Id))
-                                    .ToListAsync();
-            
-            // Add drugs to deal
-            deal.Drugs.AddRange(drugs);
-
-            // Save the deal
-            _context.Update(deal);
-            await _context.SaveChangesAsync();
         }
 
         [HttpPost, ActionName("Delete")]
@@ -230,6 +207,46 @@ namespace MDC.HappyBuisness.Web.Controllers
         {
             var drugs = await _context.Drugs.Where(drug => dealVM.DrugIds.Contains(drug.Id)).ToListAsync();
             deal.Drugs.AddRange(drugs);
+        }
+
+        private async Task UpdateDealDrugsAndSave(DealViewModel dealVM, int dealId)
+        {
+            // Load the Deal from DB
+            var deal = await _context
+                            .Deals
+                            .Include(d => d.Drugs)
+                            .Where(d => d.Id == dealId)
+                            .SingleAsync();
+
+            // Clear all deal drugs 
+            deal.Drugs.Clear();
+
+            // Load the new drugs from DB
+            var drugs = await _context
+                                    .Drugs
+                                    .Where(drug => dealVM.DrugIds.Contains(drug.Id))
+                                    .ToListAsync();
+
+            // Add drugs to deal
+            deal.Drugs.AddRange(drugs);
+
+            // Save the deal
+            
+        }
+
+        private async Task CalculateDealTotalPrice(Deal deal)
+        {
+            var buyerDiscount = await _context
+                                            .Buyers
+                                            .Where(b => b.Id == deal.BuyerId)
+                                            .Select(b => b.Discount)
+                                            .SingleAsync();
+
+            var drugsPriceTotal = deal.Drugs.Sum(d => d.Price);
+
+            var discountAmount = drugsPriceTotal * (buyerDiscount / 100f);
+
+            deal.TotalPrice = drugsPriceTotal - discountAmount;
         }
 
         #endregion

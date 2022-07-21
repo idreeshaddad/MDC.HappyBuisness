@@ -14,7 +14,7 @@ namespace MDC.HappyBuisness.Entities
         public string CodeName { get; set; }
         public Gender Gender { get; set; }
         public DateTime? DOB { get; set; }
-        public double Discount { get; set; }
+        public int Discount { get; set; }
 
         public List<Deal> Deals { get; set; }
 
@@ -40,8 +40,7 @@ namespace MDC.HappyBuisness.Entities
         {
             get
             {
-                var per = Discount * 100;
-                return $"% {per}";
+                return $"% {Discount}";
             }
         }
 
