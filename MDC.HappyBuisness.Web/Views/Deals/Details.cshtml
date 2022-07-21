@@ -47,4 +47,45 @@
         </dd>
     </dl>
 
+    <hr />
+    <h3>Drugs in Deal:</h3>
+    <p>Items Count: @Model.Drugs.Count()</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                   Street Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Classification Name
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var drug in Model.Drugs)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => drug.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => drug.StreetName)
+                    </td>
+                    <td>
+                        JOD <span class="text-primary fw-bold">@Html.DisplayFor(modelItem => drug.Price)</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => drug.ClassificationName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
 </div>

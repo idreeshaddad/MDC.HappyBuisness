@@ -8,7 +8,7 @@ namespace MDC.HappyBuisness.Web.Models.Deals
     {
         public DealDetailsViewModel()
         {
-            Drugs = new List<DrugDetailsViewModel>();
+            Drugs = new List<DrugListViewModel>();
         }
 
         public int Id { get; set; }
@@ -31,6 +31,6 @@ namespace MDC.HappyBuisness.Web.Models.Deals
         [Display(Name = "Pharmacist")]
         public string PharmacistFullName { get; set; }
 
-        public List<DrugDetailsViewModel> Drugs { get; set; }
+        public List<DrugListViewModel> Drugs { get; set; }
     }
 }

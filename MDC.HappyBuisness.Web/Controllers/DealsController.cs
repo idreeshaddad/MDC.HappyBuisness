@@ -48,6 +48,8 @@ namespace MDC.HappyBuisness.Web.Controllers
                                 .Deals
                                 .Include(d => d.Buyer)
                                 .Include(d => d.Pharmacist)
+                                .Include(d => d.Drugs)
+                                    .ThenInclude(drugs => drugs.Classification)
                                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (deal == null)
