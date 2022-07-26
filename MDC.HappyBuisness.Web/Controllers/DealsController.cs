@@ -5,6 +5,7 @@ using MDC.HappyBuisness.Entities;
 using MDC.HappyBuisness.Web.Data;
 using AutoMapper;
 using MDC.HappyBuisness.Web.Models.Deals;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MDC.HappyBuisness.Web.Controllers
 {
@@ -62,6 +63,7 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var dealVM = new DealViewModel();
@@ -73,6 +75,7 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DealViewModel dealVM)
@@ -101,6 +104,7 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Deals == null)
@@ -131,6 +135,7 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, DealViewModel dealVM)
@@ -178,6 +183,7 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

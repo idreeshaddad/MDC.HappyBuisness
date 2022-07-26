@@ -1,10 +1,11 @@
 ﻿using MDC.HappyBuisness.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MDC.HappyBuisness.Web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Drug> Drugs { get; set; }
         public DbSet<Classification> Classifications { get; set; }
