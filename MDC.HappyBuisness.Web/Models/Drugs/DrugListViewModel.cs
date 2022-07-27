@@ -15,5 +15,6 @@ namespace MDC.HappyBuisness.Web.Models.Drugs
 
         [Display(Name = "Classification Name")]
         public string? ClassificationName { get; set; }
+        public int Rating { get; set; }
     }
 }

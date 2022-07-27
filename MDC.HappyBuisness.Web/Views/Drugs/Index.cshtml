@@ -8,18 +8,10 @@
 <div class="container">
     <h1>Drugs</h1>
 
-    @if (User.Identity.IsAuthenticated)
-    {
-        <p>
-            <a class="btn btn-primary" asp-action="Create">Create New Drug</a>
-        </p>
-    }
-    else
-    {
-        <p>
-            <span>You can add new drugs if you login</span>
-        </p>
-    }
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create New Drug</a>
+    </p>
+
     <p>Items Count: @Model.Count()</p>
     <table class="table">
         <thead>
@@ -29,6 +21,9 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.StreetName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rating)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Price)
@@ -50,25 +45,25 @@
                         @Html.DisplayFor(modelItem => item.StreetName)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Rating)
+                    </td>
+                    <td>
                         JOD <span class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Price)</span>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ClassificationName)
                     </td>
                     <td>
-                        @if (User.Identity.IsAuthenticated)
-                        {
+                        
                             <a class="text-decoration-none me-2" asp-action="Edit" asp-route-id="@item.Id">
                                 <i class="fa-solid fa-marker" title="Edit" data-bs-toggle="tooltip"></i>
                             </a>
-                        }
+                        
 
                         <a class="text-decoration-none text-info me-2" asp-action="Details" asp-route-id="@item.Id">
                             <i class="fa-solid fa-circle-info" title="Details" data-bs-toggle="tooltip"></i>
                         </a>
 
-                        @if (User.Identity.IsAuthenticated)
-                        {
                             <a class="text-decoration-none text-danger pointer" data-bs-toggle="modal" data-bs-target="#delete_@item.Id">
                                 <i class="fa-solid fa-trash" title="Delete" data-bs-toggle="tooltip"></i>
                             </a>
@@ -96,7 +91,7 @@
                                     </div>
                                 </div>
                             </div>
-                        }
+                        
                     </td>
                 </tr>
             }

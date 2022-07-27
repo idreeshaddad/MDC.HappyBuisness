@@ -59,7 +59,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(drugVM);
         }
 
-        [Authorize]
         public IActionResult Create()
         {
             var drugVM = new DrugViewModel();
@@ -68,7 +67,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(drugVM);
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DrugViewModel drugVM)
@@ -86,7 +84,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(drugVM);
         }
 
-        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Drugs == null)
@@ -105,7 +102,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(drugVM);
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, DrugViewModel drugVM)
@@ -142,7 +138,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(drugVM);
         }
 
-        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
