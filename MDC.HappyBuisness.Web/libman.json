@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootstrap-star-rating@4.1.2",
+      "destination": "wwwroot/lib/bootstrap-star-rating/",
+      "files": [
+        "js/star-rating.min.js",
+        "themes/krajee-svg/theme.min.css",
+        "themes/krajee-svg/theme.min.js",
+        "css/star-rating.min.css",
+        "img/loading.gif"
+      ]
+    }
+  ]
+}

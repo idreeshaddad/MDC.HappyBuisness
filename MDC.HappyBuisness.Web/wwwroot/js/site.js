@@ -8,5 +8,12 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 })
 
 $(document).ready(function () {
+
     $('.table').DataTable();
+
+    $(".bootstrap-star-rating-readonly").rating({
+        displayOnly: true,
+        showCaption: false,
+        size: "sm"
+    });
 });
