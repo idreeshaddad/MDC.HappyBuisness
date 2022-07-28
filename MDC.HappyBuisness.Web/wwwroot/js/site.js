@@ -16,4 +16,9 @@ $(document).ready(function () {
         showCaption: false,
         size: "sm"
     });
+
+    $(".bootstrap-star-rating").rating({
+        size: "sm",
+        step: 1
+    });
 });

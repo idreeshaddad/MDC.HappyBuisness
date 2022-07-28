@@ -13,6 +13,7 @@ namespace MDC.HappyBuisness.Web.Models.Drugs
         public string StreetName { get; set; }
         public double Price { get; set; }
         public int ClassificationId { get; set; }
+        public int Rating { get; set; }
 
         [ValidateNever]
         public SelectList Classifications { get; set; }
