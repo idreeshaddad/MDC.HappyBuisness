@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MDC.HappyBuisness.Web.Models.Pharmacists.PharmacistListViewModel>
+
+@{
+    ViewData["Title"] = "Pharmacists Search Results";
+}
+
+<div class="container">
+    <h1>Pharmacists Search Results</h1>
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Age)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pharmacist in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => pharmacist.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => pharmacist.Age)
+                        </td>
+                        <td>
+                            <a asp-controller="Pharmacists" asp-action="Details" class="text-decoration-none text-info me-2" asp-route-id="@pharmacist.Id">
+                                <i class="fa-solid fa-circle-info" title="Details" data-bs-toggle="tooltip"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h3>No results found.</h3>
+    }
+</div>

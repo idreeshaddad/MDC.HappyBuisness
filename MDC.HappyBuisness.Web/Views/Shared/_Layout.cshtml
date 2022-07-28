@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap-star-rating/css/star-rating.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-star-rating/themes/krajee-svg/theme.min.css" />
 
-    
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MDC.HappyBuisness.Web.styles.css" asp-append-version="true" />
 </head>
@@ -47,6 +47,17 @@
                             <a class="nav-link text-dark" asp-controller="Deals" asp-action="Index">Deals</a>
                         </li>
                     </ul>
+
+                    <form class="d-flex" asp-controller="Search" asp-action="Search">
+                        <div class="input-group">
+                            <select name="searchType" class="form-select">
+                                <option value="drug">Drug</option>
+                                <option value="pharmacist">Pharmacist</option>
+                            </select>
+                            <input type="text" class="form-control" name="keyword" placeholder="Search Keyword">
+                        </div>
+                    </form>
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -136,7 +147,7 @@
         </div>
         <div class="lower">
             <div class="container text-center py-4 text-muted">
-                Copyright &copy; 2022 MineCRAFT By <a class="theme-text-orange text-decoration-none" href="https://www.microsoft.com">Microsoft</a>. All Rights Reserved.    
+                Copyright &copy; 2022 MineCRAFT By <a class="theme-text-orange text-decoration-none" href="https://www.microsoft.com">Microsoft</a>. All Rights Reserved.
             </div>
         </div>
     </footer>
