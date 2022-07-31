@@ -1,5 +1,5 @@
-﻿@using MDC.HappyBuisness.Web.Models.Drugs
-@model List<DrugListViewModel>
+﻿@using MDC.HappyBuisness.Web.Models.Home
+@model HomePageViewModel
 
 @{
     ViewData["Title"] = "Highway to Pharmacy";
@@ -37,7 +37,7 @@
         </div>
         <div class="row mt-5">
 
-            @foreach (var drug in Model)
+            @foreach (var drug in Model.TopRatedDrugs)
             {
                 <div class="col-md-4 mb-2">
                     <div class="theme-card">
@@ -203,11 +203,11 @@
                     </div>
                     <div class="clearfix">
                         <div class="num">
-                            92
+                            @Model.NumberOfBuyers
                         </div>
                         <div class="txt">
                             <div>Satisfied</div>
-                            <div>Clients</div>
+                            <div>Buyers</div>
                         </div>
                     </div>
                 </div>
