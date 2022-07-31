@@ -31,6 +31,7 @@ namespace MDC.HappyBuisness.Web.Controllers
             var drugs = await _context
                             .Drugs
                             .Include(d => d.Classification)
+                            .OrderBy(d => d.Price)
                             .ToListAsync();
 
             var drugVMS = _mapper.Map<List<Drug>, List<DrugListViewModel>>(drugs);

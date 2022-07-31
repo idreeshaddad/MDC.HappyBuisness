@@ -26,6 +26,8 @@ namespace MDC.HappyBuisness.Web.Controllers
         {
             var drugs = await _context
                             .Drugs
+                            .OrderByDescending(d => d.Rating)
+                            .Take(3)
                             .ToListAsync();
 
             var drugVMS = _mapper.Map<List<Drug>, List<DrugListViewModel>>(drugs);
