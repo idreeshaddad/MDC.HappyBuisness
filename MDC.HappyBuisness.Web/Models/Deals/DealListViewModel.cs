@@ -1,4 +1,5 @@
 ﻿using MDC.HappyBuisness.Utils.Enums;
+using MDC.HappyBuisness.Web.Models.Drugs;
 using System.ComponentModel.DataAnnotations;
 
 namespace MDC.HappyBuisness.Web.Models.Deals
@@ -21,5 +22,7 @@ namespace MDC.HappyBuisness.Web.Models.Deals
 
         [Display(Name = "Transaction Code")]
         public Guid TransactionCode { get; set; }
+
+        public List<DrugLightViewModel> Drugs { get; set; }
     }
 }

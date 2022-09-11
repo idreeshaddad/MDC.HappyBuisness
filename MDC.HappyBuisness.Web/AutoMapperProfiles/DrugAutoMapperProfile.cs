@@ -9,6 +9,7 @@ namespace MDC.HappyBuisness.Web.AutoMapperProfiles
         public DrugAutoMapperProfile()
         {
             CreateMap<Drug, DrugListViewModel>();
+            CreateMap<Drug, DrugLightViewModel>();
             CreateMap<Drug, DrugDetailsViewModel>();
             CreateMap<Drug, DrugViewModel>().ReverseMap();
         }

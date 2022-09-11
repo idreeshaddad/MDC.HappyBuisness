@@ -31,6 +31,7 @@ namespace MDC.HappyBuisness.Web.Controllers
             var deals = await _context
                             .Deals
                             .Include(deal => deal.Buyer)
+                            .Include(deal => deal.Drugs)
                             .ToListAsync();
 
             var dealVMs = _mapper.Map<List<DealListViewModel>>(deals);
@@ -63,7 +64,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
-        [Authorize]
         public IActionResult Create()
         {
             var dealVM = new DealViewModel();
@@ -75,7 +75,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DealViewModel dealVM)
@@ -104,7 +103,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
-        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Deals == null)
@@ -135,7 +133,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, DealViewModel dealVM)
@@ -183,7 +180,6 @@ namespace MDC.HappyBuisness.Web.Controllers
             return View(dealVM);
         }
 
-        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

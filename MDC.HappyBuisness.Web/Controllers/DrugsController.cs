@@ -28,6 +28,12 @@ namespace MDC.HappyBuisness.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var drugsWOW = await _context
+                                .Drugs
+                                .Select(d => new DrugLightViewModel() { Id = d.Id, Price = d.Price, StreetName = d.StreetName })
+                                .ToListAsync();
+
+
             var drugs = await _context
                             .Drugs
                             .Include(d => d.Classification)
